@@ -1,7 +1,10 @@
 name: Test Project
 on:
-  - issues
-  - workflow_dispatch
+  issues:
+  workflow_dispatch:
+  pull_request:
+    types:
+      - opened
 jobs:
   deploy:
     runs-on: ubuntu-latest
