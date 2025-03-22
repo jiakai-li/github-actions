@@ -12,9 +12,9 @@ jobs:
       MY_ENV: ${{ secrets.MY_ENV }}
       ENV: ${{ vars.ENV }}
     steps:
-      - name: Failed step
-        id: failed_step
-        run: exit 1
-      - name: Continue
-        if: failure() && steps.failed_step.outcome == 'failure'
-        run: echo 'Continue'
+      - name: Prepare
+        run: echo "Prepare running reusable component"
+      - name: Call reusable component
+        uses: ./.github/workflow/sub_workflow
+        with:
+          my_parameter: Parameter Passed In

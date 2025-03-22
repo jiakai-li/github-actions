@@ -1,0 +1,16 @@
+name: Reusable sub workflow
+on:
+  workflow_call:
+    inputs:
+      my_parameter:
+        type: string
+        required: true
+        description: A parameter to be passed in
+        default: default parameter
+jobs:
+  reusable_component:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run reusable component
+        run: |
+          echo "Input param: ${{ inputs.my_parameter }}"
