@@ -16,6 +16,6 @@ jobs:
         run: echo "Prepare running reusable component"
   test:
     needs: dev
-    uses: ./.github/workflow/sub_workflow.yml
+    uses: ./.github/workflows/sub_workflow.yml
     with:
       my_parameter: MY_PARAMETER
