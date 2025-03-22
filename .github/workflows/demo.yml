@@ -5,61 +5,22 @@ on:
     branches:
       - main
 jobs:
-  test:
+  dev:
+    environment: Dev
     runs-on: ubuntu-latest
     env:
-      MY_ENV: environment_abc
+      MY_ENV: ${{ secrets.MY_ENV }}
     steps:
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Install dependencies
-        run: npm ci
-      - name: Lint code
-        run: npm run lint
-      - name: Test code
-        run: npm run test
       - name: Display MY_ENV
         run: |
-          echo "MY_ENV: ${{ env.MY_ENV }}"
-  build:
-    needs: test
+          echo "${{ $MY_ENV }}"
+  test:
+    needs: dev
+    environment: Test
     runs-on: ubuntu-latest
-    outputs:
-      script-file: ${{ steps.publish_js_filename.outputs.script-file }}
+    env:
+      MY_ENV: ${{ secrets.MY_ENV }}
     steps:
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Install dependencies
-        run: npm ci
-      - name: Build website
-        run: npm run build
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist-files
-          path: dist
-      - name: Publish JS filename
-        id: publish_js_filename
-        run: find dist/assets/*.js -type f -execdir echo 'script-file={}' >> $GITHUB_OUTPUT ';'
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist-files
-      - name: Check dist content
-        run: ls
-      - name: Output filename
-        run: echo "${{ needs.build.outputs.script-file }}"
+      - name: Display MY_ENV
+        run: |
+          echo "${{ $MY_ENV }}"
