@@ -10,7 +10,7 @@ on:
     outputs:
       reusable-output:
         description: Inner component output
-        value: ${{ jobs.reusable-component.outputs.job-output }}
+        value: test
 jobs:
   reusable-component:
     outputs:
