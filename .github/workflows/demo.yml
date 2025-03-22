@@ -24,7 +24,8 @@ jobs:
       - name: Test code
         run: npm run test
       - name: Display MY_ENV
-        run: echo "MY_ENV: ${{ env.MY_ENV }}"
+        run: |
+          echo "MY_ENV: ${{ env.MY_ENV }}"
   build:
     needs: test
     runs-on: ubuntu-latest
