@@ -16,5 +16,7 @@ jobs:
         id: failed_step
         run: exit 1
       - name: Continue
-        if: failure() && steps.failed_step == 'failure'
-        run: echo 'Continue'
+        if: failure()
+        run: |
+          echo 'Continue'
+          echo "${{ steps.failed_step.outcome }}"
