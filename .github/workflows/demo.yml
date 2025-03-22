@@ -24,4 +24,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print reusable output
-        run: ${{ needs.dev-reusable.outputs.reusable-output }}
+        run: |
+          echo "Reusable componenet output: ${{ needs.dev-reusable.outputs.reusable-output }}"
