@@ -14,7 +14,7 @@ on:
 jobs:
   reusable-component:
     outputs:
-      job-output: Test
+      job-output: ${{ steps.set-output.outputs.step-output }}
     runs-on: ubuntu-latest
     steps:
       - name: Run reusable component
