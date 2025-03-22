@@ -10,17 +10,21 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MY_ENV: ${{ secrets.MY_ENV }}
+      ENV: ${{ vars.ENV }}
     steps:
       - name: Display MY_ENV
         run: |
           echo "$MY_ENV"
+          echo "ENV: $ENV"
   test:
     needs: dev
     environment: Test
     runs-on: ubuntu-latest
     env:
       MY_ENV: ${{ secrets.MY_ENV }}
+      ENV: ${{ vars.ENV }}
     steps:
       - name: Display MY_ENV
         run: |
-          echo "$MY_ENV"
+          echo "MY_ENV: $MY_ENV"
+          echo "ENV: $ENV"
