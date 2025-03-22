@@ -7,6 +7,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      MY_ENV: environment_abc
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -21,6 +23,8 @@ jobs:
         run: npm run lint
       - name: Test code
         run: npm run test
+      - name: Display MY_ENV
+        run: echo "MY_ENV: ${{ env.MY_ENV }}"
   build:
     needs: test
     runs-on: ubuntu-latest
