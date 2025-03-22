@@ -10,11 +10,11 @@ on:
     outputs:
       reusable-output:
         description: Inner component output
-        value: test
+        value: ${{ jobs.reusable-component.outputs.job-output }}
 jobs:
   reusable-component:
     outputs:
-      job-output: ${{ steps.set-output.step-output }}
+      job-output: Test
     runs-on: ubuntu-latest
     steps:
       - name: Run reusable component
