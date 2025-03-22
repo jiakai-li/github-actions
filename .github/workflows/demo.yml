@@ -14,7 +14,8 @@ jobs:
     steps:
       - name: Prepare
         run: echo "Prepare running reusable component"
-      - name: Call reusable component
-        uses: ./.github/workflow/sub_workflow
-        with:
-          my_parameter: Parameter Passed In
+  test:
+    needs: dev
+    uses: ./.github/workflow/sub_workflow.yml
+    with:
+      my_parameter: MY_PARAMETER
