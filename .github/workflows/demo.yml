@@ -14,8 +14,14 @@ jobs:
     steps:
       - name: Prepare
         run: echo "Prepare running reusable component"
-  test:
+  dev-reusable:
     needs: dev
     uses: ./.github/workflows/sub_workflow.yml
     with:
       my_parameter: MY_PARAMETER
+  print-result:
+    needs: dev-reusable
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print reusable output
+        run: ${{ needs.dev-reusable.outputs.reusable-output }}

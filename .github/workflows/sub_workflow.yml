@@ -7,10 +7,19 @@ on:
         required: true
         description: A parameter to be passed in
         default: default parameter
+    outputs:
+      reusable-output:
+        description: Inner component output
+        vaule: ${{ jobs.reusable-component.outputs.job-output }}
 jobs:
-  reusable_component:
+  reusable-component:
+    outputs:
+      job-output: ${{ steps.set-output.step-output }}
     runs-on: ubuntu-latest
     steps:
       - name: Run reusable component
         run: |
           echo "Input param: ${{ inputs.my_parameter }}"
+      - name: Set output
+        id: set-output
+        run: echo "step-output=finished_running" >> $GITHUB_OUTPUT
