@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Display MY_ENV
         run: |
-          echo "${{ $MY_ENV }}"
+          echo "$MY_ENV"
   test:
     needs: dev
     environment: Test
@@ -23,4 +23,4 @@ jobs:
     steps:
       - name: Display MY_ENV
         run: |
-          echo "${{ $MY_ENV }}"
+          echo "$MY_ENV"
